@@ -1,12 +1,30 @@
 // src/pages/index.tsx
 
-import React, { useState } from 'react';
-import HeroVideo from '../components/HeroVideo';
-import CategoryFilter from '../components/CategoryFilter';
-import MenuSection from '../components/MenuSection/MenuSection';
-import CartDrawer from '../components/CartDrawer';
-import FloatingActions from '../components/FloatingActions';
-import { menuItems } from '../data/menuItems';
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+import { menuItems } from '../data/menuItems'
+
+// Client-only wrappers to avoid "undefined" at build time:
+const HeroVideo = dynamic(
+  () => import('../components/HeroVideo'),
+  { ssr: false }
+)
+const CategoryFilter = dynamic(
+  () => import('../components/CategoryFilter'),
+  { ssr: false }
+)
+const MenuSection = dynamic(
+  () => import('../components/MenuSection/MenuSection'),
+  { ssr: false }
+)
+const CartDrawer = dynamic(
+  () => import('../components/CartDrawer'),
+  { ssr: false }
+)
+const FloatingActions = dynamic(
+  () => import('../components/FloatingActions'),
+  { ssr: false }
+)
 
 export default function Home() {
   const categories = [
@@ -21,12 +39,12 @@ export default function Home() {
     'Add-Ons',
     'Cartel Deals',
     'Theme Days',
-  ];
+  ]
 
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [cartItem, setCartItem] = useState<any>(null);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [cartItem, setCartItem] = useState<any>(null)
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   const filteredItems = menuItems
     .filter(
@@ -37,7 +55,7 @@ export default function Home() {
       (item) =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
   return (
     <div className="min-h-screen bg-white text-black relative">
@@ -55,8 +73,8 @@ export default function Home() {
         title={selectedCategory}
         items={filteredItems}
         onItemClick={(item) => {
-          setCartItem(item);
-          setIsCartOpen(true);
+          setCartItem(item)
+          setIsCartOpen(true)
         }}
       />
 
@@ -68,5 +86,5 @@ export default function Home() {
 
       <FloatingActions />
     </div>
-  );
+  )
 }
