@@ -8,9 +8,17 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.6"
+    "tailwindcss": "^4.1.6",
+    "typescript": "latest",
+    "@types/react": "latest",
+    "@types/node": "latest"
   }
 }
