@@ -1,6 +1,5 @@
 // src/pages/index.tsx
 
-import '../styles/globals.css'
 import HeroVideo from '../components/HeroVideo'
 
 export default function Home() {
